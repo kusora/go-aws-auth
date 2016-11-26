@@ -34,20 +34,9 @@ func serviceAndRegion(host string) (service string, region string) {
 	service = "s3"
 
 	parts := strings.Split(host, ".")
-	if len(parts) == 4 {
-		// Either service.region.amazonaws.com or virtual-host.region.amazonaws.com
-		if parts[1] == "s3" {
-			service = "s3"
-		} else if strings.HasPrefix(parts[1], "s3-") {
-			region = parts[1][3:]
-			service = "s3"
-		} else {
-			service = parts[0]
-			region = parts[1]
-		}
-	} else if len(parts) == 5 {
-		service = parts[2]
-		region = parts[1]
+	if len(parts) == 6 {
+		service = parts[1]
+		region = parts[2]
 	} else {
 		// Either service.amazonaws.com or s3-region.amazonaws.com
 		if strings.HasPrefix(parts[0], "s3-") {
