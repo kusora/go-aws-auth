@@ -37,7 +37,10 @@ func serviceAndRegion(host string) (service string, region string) {
 	if len(parts) == 6 {
 		service = parts[1]
 		region = parts[2]
-	} else {
+	} else if len(parts) == 5 {
+		service = parts[0]
+		region = parts[1]
+	}else {
 		// Either service.amazonaws.com or s3-region.amazonaws.com
 		if strings.HasPrefix(parts[0], "s3-") {
 			region = parts[0][3:]

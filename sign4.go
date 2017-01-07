@@ -45,6 +45,7 @@ func hashedCanonicalRequestV4(request *http.Request, meta *metadata) string {
 		}
 		headersToSign += key + ":" + value + "\n"
 	}
+
 	meta.signedHeaders = concat(";", sortedHeaderKeys...)
 	canonicalRequest := concat("\n", request.Method, normuri(request.URL.Path), normquery(request.URL.Query()), headersToSign, meta.signedHeaders, payloadHash)
 
